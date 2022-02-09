@@ -5,15 +5,38 @@
 </head>
 <body>
   <div class="container">
-    <div class="jumbotron">
-      <h1>Crypto</h1>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">The Crypto Keeper</h1>
+        <p class="lead">This is a utility powered by the Nomics API that converts historical dollars to today's USD and your choice of cryptocurrency.</p>
+      </div>
     </div>
-    <h2>Get crypto information:</h2>
-    <label for="bitcoin">Bitcoin!</label>
-    <input type="radio" id="bitcoin" name="coin" value="BTC" checked>
-    <label for="dogecoin">DOGE!</label>
-    <input type="radio" id="dogecoin" name="coin" value="DOGE">
-    <button class="btn-success" id="checkCrypto">Check it out!</button>
+    <div class="input-area">
+      <p>Enter your starting year, starting dollar amount, and cryptocurrency choice below. For example, to learn how many bitcoin you could buy with $2.00 of 1966 dollars, enter "1966", "2", and "Bitcoin."</p>
+      <form>
+        <div class="form-group">
+          <label class="form-control" for="user-date">Enter a year<label>
+          <input class="form-control" type="number" name="user-date" id="user-date" min="1900" max="2021">
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="coin" id="bitcoin" value="bitcoin">
+            <label class="form-check-label" for="bitcoin" checked>
+              Bitcoin (BTC)
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="coin" id="doge" value="DOGE">
+            <label class="form-check-label" for="doge">
+              Dogecoin (Ɖ)
+            </label>
+          </div>
+        </div>
+      </form>
+      <div class="text-center">
+        <button class="btn-success" id="checkCrypto">Check it out!</button>        
+      </div>        
+    </div>
     <div class="showCoin"></div>
     <div class="showErrors"></div>
   </div>
