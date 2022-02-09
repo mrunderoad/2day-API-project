@@ -6,27 +6,26 @@ import CryptoService from './js/api.js';
 
 function clearFields() {
   $("input:radio[name=coin]:checked").val("");
+  $("#user-amount").val("");
 }
 
-function getElements(response) {
-  if (response) {
-    $('.showCoin').text(`The price of ${response[0].name} is ${response[0].price}.`);
-  } else {
-    $('.showErrors').text(`There was an error: ${response.message}`);
+function getElements(outputUSD, outputCrypto, userYear, userAmt, userCoin) {
+  $('.showCoin').text(`Today, the ${userAmt}$ you had in ${userYear} is worth ${outputUSD}$. You could buy ${outputCrypto} ${userCoin} with that!`);
+}
+
+async function makeApiCall(userCoin, outputUSD, userAmt, userYear) {
+  const response = await CryptoService.getCrypto(userCoin);
+  const outputCrypto = outputUSD/response[0].price;
+  getElements(outputUSD, outputCrypto, userYear, userAmt, userCoin);
   }
-}
-
-async function makeApiCall(coin) {
-  const response = await CryptoService.getCrypto(coin);
-  console.log(response[0].price);
-  console.log(response[0].name);
-  getElements(response);
-}
 
 $(document).ready(function() {
   $('#checkCrypto').click(function() {
-    let coin = $("input:radio[name=coin]:checked").val();
+    let userCoin = $("input:radio[name=coin]:checked").val();
+    let userAmt = parseFloat($("#user-amount").val());
+    let userYear = 2000;
     clearFields();
-    makeApiCall(coin);
+    let outputUSD = userAmt;
+    makeApiCall(userCoin, outputUSD, userAmt, userYear)
   });
 });
